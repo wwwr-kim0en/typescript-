@@ -1,0 +1,5 @@
+.DS_Store
+.qodo/*
+.idea/*
+*/package-lock.json
+*/node_modules
