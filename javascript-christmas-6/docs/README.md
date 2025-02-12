@@ -1,7 +1,7 @@
 ## 프로그래밍 요구 사항
 
 - [ ] Node.js 18.17.1 버전에서 실행 가능해야 한다.
-- [ ] 프로그램 실행의 시작점은 `App.js`의 `run()` 이다.
+- [ ] 프로그램 실행의 시작점은 `App.ts`의 `run()` 이다.
 
 ```javascript
 const app = new App();
