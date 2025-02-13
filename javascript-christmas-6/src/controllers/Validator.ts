@@ -1,42 +1,41 @@
+import { EVENT_MONTH_END_DAY, EVENT_MONTH_START_DAY } from '../commons/constants';
+import { NO_INPUT, ONLY_NUMBER } from '../commons/constants/errorMessage';
+import { Menu } from '../commons/types/service';
+import { ValidationError } from '../models/CustomError';
+
 export default class Validator {
-	private static type: number | null;
-	private static instance: Validator;
+	constructor() {}
 
-	constructor(type: any) {
-		switch (type) {
-			case 'date':
-				this.validateDate();
-				break;
-			case 'menu':
-				this.validateMenu();
-				break;
-			default:
-				throw new Error('Invalid type');
-		}
-	}
-	public static getInstance(type: any) {
-		if (this.type == null || this.type !== type) {
-			this.type = type;
-			this.instance = new Validator(type);
-		}
-		return this.instance;
-	}
-	public static validateNull(input: string) {
-		const trimmedInput = input.trim();
-		if (!trimmedInput) {
-			throw new Error('');
-		}
+	static validateDateInput(dateInput: string): number {
+		this.isEmptyString(dateInput);
+		this.isNumber(dateInput);
+		this.isNumberInRange(+dateInput);
+		return +dateInput;
 	}
 
-	private validateNumber(input: string, condition?: boolean) {
+	static validateMenuInput(menuInput: string): Menu {
+		this.isEmptyString(menuInput);
+		return [];
+	}
+
+	// 날짜 관련 유효성 검사
+	private static isNumber(input: string): void {
 		if (isNaN(+input)) {
-			throw new Error();
+			throw new ValidationError(ONLY_NUMBER);
 		}
-
-		return +input;
 	}
-	private validateString() {}
-	validateDate() {}
 
-	validateMenu() {}
+	private static isNumberInRange(num: number): void {
+		if (typeof num !== 'number') return;
+		if (num < 1 || num > 31 || num % 1 !== 0) {
+			throw new ValidationError(`${EVENT_MONTH_START_DAY}이상 ${EVENT_MONTH_END_DAY} 이하의 정수만 입력 가능합니다.`);
+		}
+	}
+
+	private static isEmptyString(input: string): void {
+		const trimmed = input.trim();
+		if (!trimmed) {
+			throw new ValidationError(NO_INPUT);
+		}
+	}
 }

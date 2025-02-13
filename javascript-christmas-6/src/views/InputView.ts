@@ -1,6 +1,7 @@
 import { BREAK_LINE, EVENT_MONTH } from '../commons/constants/index.js';
 import { Menu } from '../commons/types/service.ts';
 import { Console } from '../commons/utils/missionUtils.js';
+import Validator from '../controllers/Validator.ts';
 import OutputView from './OutputView.js';
 
 const ASK_DATE = `${EVENT_MONTH}월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)`;
@@ -18,10 +19,9 @@ export default class InputView {
 	}
 
 	async requestDate(): Promise<number> {
-		const dateInput = await Console.readLineAsync(ASK_DATE);
-		// validate dateInput
-
-		return +dateInput;
+		const dateInput: string = await Console.readLineAsync(ASK_DATE);
+		const validatedValue = Validator.validateDateInput(dateInput);
+		return validatedValue;
 	}
 
 	async requestMenu(): Promise<Menu> {
