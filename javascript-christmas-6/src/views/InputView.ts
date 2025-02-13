@@ -1,5 +1,6 @@
 import { BREAK_LINE, EVENT_MONTH } from '../commons/constants/index.js';
-import { Menu } from '../commons/types/service.ts';
+import { Food} from '../commons/types/service.ts';
+import { convertToMenu} from '../commons/utils/convertToMenu.ts';
 import { Console } from '../commons/utils/missionUtils.js';
 import Validator from '../controllers/Validator.ts';
 import OutputView from './OutputView.js';
@@ -24,10 +25,10 @@ export default class InputView {
 		return validatedValue;
 	}
 
-	async requestMenu(): Promise<Menu> {
+	async requestMenu(): Promise<Food[]> {
 		const menuInput = await Console.readLineAsync(ASK_MENU + BREAK_LINE);
-		//validate menuInput
-		OutputView.print(menuInput);
-		return [];
+		Validator.validateMenuInput(menuInput);
+		const menu = convertToMenu(menuInput);
+		return menu;
 	}
 }
