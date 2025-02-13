@@ -1,5 +1,5 @@
 import { BREAK_LINE, EVENT_MONTH } from '../commons/constants/index.js';
-import { Menu } from '../commons/types/service.js';
+import { Menu } from '../commons/types/service.ts';
 import { Console } from '../commons/utils/missionUtils.js';
 import OutputView from './OutputView.js';
 

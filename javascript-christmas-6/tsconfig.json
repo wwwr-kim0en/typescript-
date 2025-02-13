@@ -95,5 +95,5 @@
 		"skipLibCheck": true /* Skip type checking all .d.ts files. */
 	},
 	"include": ["src/**/*"],
-	"exclude": ["__tests__/**/*", "dist/**/*"]
+	"exclude": ["__tests__/**/*", "dist/**/*", "docs/*"]
 }
