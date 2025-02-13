@@ -1,7 +1,7 @@
 ## 프로그래밍 요구 사항
 
-- [ ] Node.js 18.17.1 버전에서 실행 가능해야 한다.
-- [ ] 프로그램 실행의 시작점은 `App.ts`의 `run()` 이다.
+- [X] Node.js 18.17.1 버전에서 실행 가능해야 한다.
+- [X] 프로그램 실행의 시작점은 `App.ts`의 `run()` 이다.
 
 ```javascript
 const app = new App();
@@ -15,38 +15,18 @@ app.run();
 - [ ] 함수(메서드)의 길이가 15라인을 넘지 않도록 구현한다.
 - [ ] `else` 를 지양한다.
 - [ ] 도메인 로직에 단위 테스트를 구현해야 한다.
-- [ ] `InputView`, `OutputView` 객체를 활용해 구현한다.
+- [X] `InputView`, `OutputView` 객체를 활용해 구현한다.
 
-```javascript
-export default InputView = {
-	async readDate() {
-		const input = await Console.readLineAsync('12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)');
-		// ...
-	},
-	// ...
-};
-```
-
-```javascript
-export default OutputView = {
-	printMenu() {
-		Console.print('<주문 메뉴>');
-		// ...
-	},
-	// ...
-};
-```
-
-- [ ] 라이브러리 `@woowacourse/mission-utils`에서 제공하는 `Console` API를 사용하여 구현한다.
+- [X] 라이브러리 `@woowacourse/mission-utils`에서 제공하는 `Console` API를 사용하여 구현한다.
   - 입력 값 받기 - `Console.readLineAsync()`
   - 값 출력하기 - `Console.print()`
 
 ## 구현 기능 목록
 
-- [ ] 방문 날짜 입력값 받기
+- [X] 방문 날짜 입력값 받기
   - [ ] 1 이상 31 이하의 `number`만 가능
   - [ ] 외의 경우 에러 메세지 출력
-- [ ] 메뉴 입력값 받기
+- [X] 메뉴 입력값 받기
   - [ ] 메뉴의 개수는 1 이상 20 이하의 `number`만 가능
   - [ ] 음료만 주문 불가능
   - [ ] 메뉴판에 없는 메뉴 입력 시, 에러 메세지 출력
