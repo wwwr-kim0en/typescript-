@@ -1,21 +1,22 @@
-import { EVENT_MONTH_END_DAY, EVENT_MONTH_START_DAY } from '../commons/constants';
-import { NO_INPUT, ONLY_NUMBER } from '../commons/constants/errorMessage';
-import { Menu } from '../commons/types/service';
-import { ValidationError } from '../models/CustomError';
+import { EVENT_MONTH_END_DAY, EVENT_MONTH_START_DAY } from '../commons/constants/index.ts';
+import { INVALID_MENU, NO_INPUT, ONLY_NUMBER } from '../commons/constants/errorMessage.ts';
+import { ValidationError } from '../models/CustomError.ts';
+import { convertToMenu } from '../commons/utils/convertToMenu.ts';
 
 export default class Validator {
 	constructor() {}
 
-	static validateDateInput(dateInput: string): number {
+	public static validateDateInput(dateInput: string): number {
 		this.isEmptyString(dateInput);
 		this.isNumber(dateInput);
 		this.isNumberInRange(+dateInput);
 		return +dateInput;
 	}
 
-	static validateMenuInput(menuInput: string): Menu {
+	public static validateMenuInput(menuInput: string): void {
 		this.isEmptyString(menuInput);
-		return [];
+		this.isMenuFormat(menuInput);
+		convertToMenu(menuInput);
 	}
 
 	// 날짜 관련 유효성 검사
@@ -27,7 +28,7 @@ export default class Validator {
 
 	private static isNumberInRange(num: number): void {
 		if (typeof num !== 'number') return;
-		if (num < 1 || num > 31 || num % 1 !== 0) {
+		if (num < EVENT_MONTH_START_DAY || num > EVENT_MONTH_END_DAY || num % 1 !== 0) {
 			throw new ValidationError(`${EVENT_MONTH_START_DAY}이상 ${EVENT_MONTH_END_DAY} 이하의 정수만 입력 가능합니다.`);
 		}
 	}
@@ -36,6 +37,20 @@ export default class Validator {
 		const trimmed = input.trim();
 		if (!trimmed) {
 			throw new ValidationError(NO_INPUT);
+		}
+	}
+
+	private static isMenuFormat(menuInput: string) {
+		const arr = menuInput.split(',');
+		for (const item of arr) {
+			const inputItem = item.split('-');
+			if (inputItem.length !== 2) {
+				throw new ValidationError(INVALID_MENU);
+			}
+			const [menu, count] = inputItem;
+			if (isNaN(+count)) {
+				throw new ValidationError(INVALID_MENU);
+			}
 		}
 	}
 }
