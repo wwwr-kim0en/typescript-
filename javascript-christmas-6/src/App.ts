@@ -5,7 +5,12 @@ export default class App {
 	async run() {
 		const outputView = OutputView.getInstance();
 		const inputView = InputView.getInstance();
+
 		outputView.printGreetings();
-		await inputView.requestDate();
+
+		const date = await inputView.requestDate();
+		const menu = await inputView.requestMenu();
+
+		outputView.printEventResult(date, menu);
 	}
 }
