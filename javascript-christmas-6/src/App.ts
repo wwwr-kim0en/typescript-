@@ -1,5 +1,6 @@
 import OutputView from './views/OutputView.ts';
 import InputView from './views/InputView.ts';
+import { Food } from './commons/types/service.ts';
 
 export default class App {
 	async run() {
@@ -8,8 +9,9 @@ export default class App {
 
 		outputView.printGreetings();
 
-		const date = await inputView.requestDate();
-		const menu = await inputView.requestMenu();
+		const date: number = await inputView.requestDate();
+
+		const menu: Food[] = await inputView.requestMenu();
 
 		outputView.printEventResult(date, menu);
 	}
