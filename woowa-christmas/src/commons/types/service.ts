@@ -1,7 +1,7 @@
 export type Food = {
 	name: string;
 	price: number;
-	count: number;
+	count?: number;
 	type: number; // 0-에피타이저,1-메인,2-디저트,3-음료
 };
 

@@ -13,6 +13,6 @@ export default class App {
 
 		const menu: Food[] = await inputView.requestMenu();
 
-		outputView.printEventResult(date, menu);
+		outputView.printEventPreview(date, menu);
 	}
 }
