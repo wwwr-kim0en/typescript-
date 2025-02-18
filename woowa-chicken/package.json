@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@woowacourse/mission-utils": "^2.1.1",
+    "typescript": "^5.3.2"
+  }
+}
